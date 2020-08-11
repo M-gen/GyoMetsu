@@ -37,12 +37,12 @@ namespace GyoMetsu
 
             var runner = new Emugen.OpenTK.Runner("魚滅の槍");
 
-            //runner.Run(new Scene.TitleScene());
+            runner.Run(new Scene.TitleScene());
             //runner.Run(new Scene.TestScene(@"data/script/battle_01.cs") );
 
             //runner.Run(new Scene.BattleScene(@"data/script/battle_01.cs") );
             //runner.Run(new Scene.BattleScene(@"data/script/battle_02.cs"));
-            runner.Run(new Scene.BattleScene(@"data/script/battle_03.cs"));
+            //runner.Run(new Scene.BattleScene(@"data/script/battle_03.cs"));
             //runner.Run( new Scene.TalkScene(@"data/script/talk_script_01.cs") );
             //runner.Run( new Scene.TalkScene(@"data/script/talk_script_02.cs") );
             //runner.Run( new Scene.TalkScene(@"data/script/talk_script_03.cs") );
