@@ -1,0 +1,2 @@
+python bat_1_配布用パッケージ化.py
+pause
