@@ -25,4 +25,6 @@
 
 ## 利用ツール
 
+Visual Studio 2019 C#
+Python 3.6.7
 markdownlint [https://marketplace.visualstudio.com/items?itemName=DavidAnson.vscode-markdownlint]
