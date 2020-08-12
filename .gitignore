@@ -30,3 +30,4 @@ Thumbs.db
 _UpgradeReport_Files/
 _ReSharper.*/
 Data/PersonalDatas
+!/Bat/tool/*.exe
