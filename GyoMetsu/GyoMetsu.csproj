@@ -64,6 +64,7 @@
     <Compile Include="Scene\TalkScene.cs" />
     <Compile Include="Scene\TestScene.cs" />
     <Compile Include="Scene\TitleScene.cs" />
+    <Compile Include="StartScript.cs" />
     <Compile Include="UI\CharacterCard.cs" />
     <Compile Include="UI\Common\Button.cs" />
     <Compile Include="UI\Effect\ActionEffectUpdate.cs" />
