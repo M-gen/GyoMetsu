@@ -126,19 +126,34 @@ namespace GyoMetsu.Data
 
                     if(targetAction!=null)
                     {
-                        // todo : パーティメンバーの前半を優先する…
-                        var j = random.Next(DataCreater.Instance.playerCharacters.Count);
-                        var targetCharacter = DataCreater.Instance.playerCharacters[j];
-                        while(targetCharacter.HP.Now<=0)
+                        if ( targetAction.Main.TargetWord.IndexOf("横列") == 0 )
                         {
-                            j = random.Next(DataCreater.Instance.playerCharacters.Count);
-                            targetCharacter = DataCreater.Instance.playerCharacters[j];
-                        }
+                            // 範囲攻撃
 
-                        // todo : 敵の行動で複数選択に対応したい
-                        var targetCharacters = new List<Character>();
-                        targetCharacters.Add(targetCharacter);
-                        Action(targetAction, targetCharacters);
+                            var targetCharacters = new List<Character>();
+                            foreach( var i in DataCreater.Instance.playerCharacters)
+                            {
+                                targetCharacters.Add(i);
+                            }
+                            Action(targetAction, targetCharacters);
+                        }
+                        else
+                        {
+                            // todo : パーティメンバーの前半を優先する…
+                            var j = random.Next(DataCreater.Instance.playerCharacters.Count);
+                            var targetCharacter = DataCreater.Instance.playerCharacters[j];
+                            while (targetCharacter.HP.Now <= 0)
+                            {
+                                j = random.Next(DataCreater.Instance.playerCharacters.Count);
+                                targetCharacter = DataCreater.Instance.playerCharacters[j];
+                            }
+
+                            // todo : 敵の行動で複数選択に対応したい
+                            var targetCharacters = new List<Character>();
+                            targetCharacters.Add(targetCharacter);
+                            Action(targetAction, targetCharacters);
+
+                        }
                     }
                 }
             }
