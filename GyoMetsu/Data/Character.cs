@@ -129,7 +129,6 @@ namespace GyoMetsu.Data
                         if ( targetAction.Main.TargetWord.IndexOf("横列") == 0 )
                         {
                             // 範囲攻撃
-
                             var targetCharacters = new List<Character>();
                             foreach( var i in DataCreater.Instance.playerCharacters)
                             {
@@ -148,7 +147,6 @@ namespace GyoMetsu.Data
                                 targetCharacter = DataCreater.Instance.playerCharacters[j];
                             }
 
-                            // todo : 敵の行動で複数選択に対応したい
                             var targetCharacters = new List<Character>();
                             targetCharacters.Add(targetCharacter);
                             Action(targetAction, targetCharacters);
@@ -237,6 +235,7 @@ namespace GyoMetsu.Data
                             {
                                 value += random.Next(1, value_dn + 1);
                             }
+                            if (value < 0) value = 0;
 
                             targetCharacter.HP.Now -= value;
                             if (targetCharacter.HP.Now <= 0)
@@ -274,6 +273,7 @@ namespace GyoMetsu.Data
                         {
                             value += random.Next(1, value_dn + 1);
                         }
+                        if (value < 0) value = 0;
 
                         targetCharacter.HP.Now += value;
                         if (targetCharacter.HP.Now > targetCharacter.HP.Max)

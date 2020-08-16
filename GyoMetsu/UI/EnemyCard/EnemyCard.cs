@@ -132,6 +132,10 @@ namespace GyoMetsu.UI.EnemyCard
                 mouseOnTarget = sprite;
             }
 
+            foreach (var element in character.Elements)
+            {
+                AddElement(element);
+            }
         }
 
         public void Update()
@@ -300,7 +304,7 @@ namespace GyoMetsu.UI.EnemyCard
             layer.Add(sprite, 10);
             mySprites.element.Add(sprite);
 
-            SetPosition(this.position);
+            if (this.position!=null) SetPosition(this.position);
         }
 
         public override void RemoveElement(int index)

@@ -320,6 +320,11 @@ namespace GyoMetsu.Scene
                     }
                 }
 
+                foreach (var p in enemeyCreator.scriptAPI.DefalutStockElement)
+                {
+                    chara.Elements.Add(new Data.Element(p.ToString()));
+                }
+
                 foreach (var p in enemeyCreator.scriptAPI.ElementLingPart)
                 {
                     chara.ElementLing.Bodys.Add(p);
@@ -388,7 +393,6 @@ namespace GyoMetsu.Scene
                 foreach (var p in creator.scriptAPI.DefalutStockElement)
                 {
                     chara.Elements.Add(new Data.Element(p.ToString()));
-
                 }
                 data.playerCharacters.Add(chara);
             }
