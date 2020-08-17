@@ -10,10 +10,10 @@ AddStatusBase("PROT", 2);
 
 AddActionSkill( "木の杖" );
 AddActionSkill( "枝葉の矢" );
-AddActionSkill( "炎の風" ); // 命中
+AddActionSkill( "炎の風" ); 
 AddActionSkill( "吹き荒れる炎" );
 
-DefalutStockElement = "祈樹";
+DefalutStockElement = "";
 AddElementLingPart("獣");
 AddElementLingPart("樹");
 AddElementLingPart("鉄");

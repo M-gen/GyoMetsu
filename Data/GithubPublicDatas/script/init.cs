@@ -1,10 +1,10 @@
 Title = "魚滅の槍";
 
-//StartTitleScene();
+StartTitleScene();
 //StartTestScene();
 
 //StartBattleScene(@"data/script/battle_01.cs");
-StartBattleScene(@"data/script/battle_02.cs");
+//StartBattleScene(@"data/script/battle_02.cs");
 //StartBattleScene(@"data/script/battle_03.cs");
 
 //StartTalkScene(@"data/script/talk_script_01.cs");

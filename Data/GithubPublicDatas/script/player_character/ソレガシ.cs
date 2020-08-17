@@ -13,18 +13,8 @@ AddActionSkill( "一凪" );
 AddActionSkill( "狼波刃" );
 
 DefalutStockElement = "獣";
-AddElementLingPart("獣");
 AddElementLingPart("樹");
 AddElementLingPart("鉄");
 AddElementLingPart("理");
-AddElementLingPart("樹");
-AddElementLingPart("理");
+AddElementLingPart("樹獣");
 AddElementLingPart("祈");
-AddElementLingPart("獣");
-AddElementLingPart("樹");
-AddElementLingPart("鉄");
-AddElementLingPart("理");
-AddElementLingPart("樹");
-AddElementLingPart("理獣樹");
-AddElementLingPart("祈");
-
