@@ -51,6 +51,8 @@ namespace GyoMetsu.UI.EnemyCard
 
         ActionEffectUpdate actionEffectUpdate;
 
+        int HPBarFrameWidth = 60;
+
         public EnemyCard(System.Drawing.Bitmap cardImage, Vector2D position, string viewName, Data.Character character)
         {
             this.cardImage = cardImage;
@@ -84,7 +86,7 @@ namespace GyoMetsu.UI.EnemyCard
             {
                 var x = 0;
                 var y = 0;
-                var w = 60;
+                var w = HPBarFrameWidth;
                 var h = 6;
                 var sprite = new PlaneSprite(new Rect(new Vector2D(x, y), new Vector2D(w, h)), new Color(0.75, 1, 0.2, 0.0));
                 layer.Add(sprite, 10);
@@ -93,7 +95,7 @@ namespace GyoMetsu.UI.EnemyCard
             {
                 var x = 0;
                 var y = 0;
-                var w = 60 + 2;
+                var w = HPBarFrameWidth + 2;
                 var h = 6 + 2;
                 var sprite = new PlaneLineSprite(new Rect(new Vector2D(x, y), new Vector2D(w, h)), new Color(0.5, 0, 0, 0));
                 layer.Add(sprite, 10);
@@ -174,7 +176,7 @@ namespace GyoMetsu.UI.EnemyCard
 
                         {
                             var val = (double)character.HP.Now / (double)character.HP.Max;
-                            mySprites.hpBar.Rect.Size.X = 60 * val;
+                            mySprites.hpBar.Rect.Size.X = HPBarFrameWidth * val;
                         }
                     }
                     break;
@@ -182,7 +184,7 @@ namespace GyoMetsu.UI.EnemyCard
                     {
                         {
                             var val = (double)character.HP.Now / (double)character.HP.Max;
-                            mySprites.hpBar.Rect.Size.X = 60 * val;
+                            mySprites.hpBar.Rect.Size.X = HPBarFrameWidth * val;
                         }
 
                         mySprites.mouseOn.IsDraw = false;

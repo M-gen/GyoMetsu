@@ -48,12 +48,12 @@ namespace Develop
             Marshal.Copy(pixels, 0, data, pixels.Length);
             Marshal.FreeHGlobal(data);
 
-            unsafe
-            {
+            //unsafe
+            //{
 
-                var image = Image_Create((uint)width, (uint)height, data);
-                Image_ChangeFullRGB(image, 255, 0, 0);
-            }
+            //    var image = Image_Create((uint)width, (uint)height, data);
+            //    Image_ChangeFullRGB(image, 255, 0, 0);
+            //}
 
 
             //var position = new Vector2D(100, 100);

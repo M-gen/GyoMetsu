@@ -22,6 +22,7 @@ namespace GyoMetsu.UI.Talk
             public TextSprite TextSprite;
             public Rect Rect;
             public PlaneLineSprite PlaneLineSprite;
+            public PlaneSprite BackPlaneSprite;
 
             public bool IsMouseOn;
         }
@@ -51,9 +52,16 @@ namespace GyoMetsu.UI.Talk
                 {
                     var x = 500;
                     var y = 300 + i * 60;
-                    var sprite = new PlaneLineSprite(new Rect( new Vector2D(x, y), new Vector2D(600, 50)), new Color(1, 1, 0, 0));
+                    var sprite = new PlaneLineSprite(new Rect(new Vector2D(x, y), new Vector2D(600, 50)), new Color(0.5, 1, 1, 1));
                     layer.Add(sprite, 20);
                     item.PlaneLineSprite = sprite;
+                }
+                {
+                    var x = 500;
+                    var y = 300 + i * 60;
+                    var sprite = new PlaneSprite(new Rect(new Vector2D(x, y), new Vector2D(600, 50)), new Color(0.5, 0, 0, 0));
+                    layer.Add(sprite, 5);
+                    item.BackPlaneSprite = sprite;
                 }
                 item.Text = text;
 

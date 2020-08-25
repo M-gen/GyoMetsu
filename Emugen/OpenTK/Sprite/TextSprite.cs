@@ -377,13 +377,6 @@ namespace Emugen.OpenTK.Sprite
                     if (OnShowEnd != null) OnShowEnd();
                 }
             }
-            //else
-            //{
-            //    foreach (var item in items)
-            //    {
-            //        item.imageSprite.Color = Color; // Todo 
-            //    }
-            //}
         }
 
         public override void Draw()

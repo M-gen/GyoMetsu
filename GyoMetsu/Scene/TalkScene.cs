@@ -30,7 +30,7 @@ namespace GyoMetsu.Scene
 
         Emugen.Image.Animation.OneToOneTimer fadeTimer = new Emugen.Image.Animation.OneToOneTimer(0, 1, 20);
         Emugen.Image.Animation.OneToOneTimer slideTimer = new Emugen.Image.Animation.OneToOneTimer(0, 20, 20);
-        Vector2D characterPosition = new Vector2D(600, 0);
+        Vector2D characterPosition = new Vector2D(925, 0);
 
         Emugen.Image.Animation.BSplineXtoY fadeTimerSpline;
         int fadeTimerTime = 0;
@@ -132,7 +132,7 @@ namespace GyoMetsu.Scene
                 waitEnterIconTimer++;
                 if (waitEnterIconTimer > waitEnterIconTimerMax) waitEnterIconTimer = 0;
                 ImageSpriteWaitEnterIcon.Rect.Position.Y = 800 - 10 + ((double)waitEnterIconTimer / waitEnterIconTimerMax) * waitEnterIconTimerMove;
-                ImageSpriteWaitEnterIcon.IsDraw = true;
+                //ImageSpriteWaitEnterIcon.IsDraw = true;
             }
             else
             {
@@ -254,7 +254,15 @@ namespace GyoMetsu.Scene
                                 ts.OnShowEnd += () =>
                                 {
                                     targetTextSpriteIndex++;
+                                    if (textSprites.Count() <= targetTextSpriteIndex ) {
+                                        ImageSpriteWaitEnterIcon.IsDraw = true;
+                                    }
+                                    else if ( textSprites[targetTextSpriteIndex] == null ) 
+                                    {
+                                        ImageSpriteWaitEnterIcon.IsDraw = true;
+                                    }
                                 };
+                                ImageSpriteWaitEnterIcon.IsDraw = false;
                                 textLineNum++;
                             }
                             scriptAPI.__talkText = null;
@@ -270,7 +278,7 @@ namespace GyoMetsu.Scene
                         }
 
                         var texture = TextureResourceManager.Instance.GetTexture(scriptAPI.__talkCharacterImagePath);
-                        var w = 1300;//1024;
+                        var w = texture.Size.X;// 1300;//1024;
                         var h = (int)((double)texture.Size.Y / (double)texture.Size.X * w);
 
                         var sprite = new ImageSprite(
