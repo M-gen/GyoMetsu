@@ -51,12 +51,15 @@ namespace GyoMetsu.UI.EnemyCard
 
         ActionEffectUpdate actionEffectUpdate;
 
-        int HPBarFrameWidth = 60;
+        int HPBarFrameWidth;
+        const int HPBarFrameWidthBase = 60;
+
 
         public EnemyCard(System.Drawing.Bitmap cardImage, Vector2D position, string viewName, Data.Character character)
         {
             this.cardImage = cardImage;
             this.character = character;
+            this.HPBarFrameWidth = (int)(HPBarFrameWidthBase * character.HPBarFrameWidthScale);
             character.enemyCard = this;
 
             {

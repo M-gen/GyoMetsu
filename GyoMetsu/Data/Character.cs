@@ -62,6 +62,7 @@ namespace GyoMetsu.Data
 
         static private Random random = new Random(); // Todo : ゲーム用乱数を統一で保持したほうが良い？
 
+        public double HPBarFrameWidthScale = 1.0;
         public Action ActionStock;
 
 

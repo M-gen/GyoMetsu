@@ -23,10 +23,10 @@ namespace GyoMetsu.Data
         {
             public string Name;
             public string ImagePath;
-            public double ImageScale = 1.0;
             public double ImageSideMargin = 1.0;
             public string DefalutStockElement = "";
             public int HP = 0;
+            public double HPBarFrameWidthScale = 1.0;
 
             public Random Random = new Random();
 

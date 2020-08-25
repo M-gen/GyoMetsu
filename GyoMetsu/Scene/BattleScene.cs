@@ -292,6 +292,7 @@ namespace GyoMetsu.Scene
                 chara.imageScale = enemeyCreator.scriptAPI.ImageScale;
                 chara.imageSideMargin = enemeyCreator.scriptAPI.ImageSideMargin;
                 chara.HP.Now = chara.HP.Base = chara.HP.Max = enemeyCreator.scriptAPI.HP;
+                chara.HPBarFrameWidthScale = enemeyCreator.scriptAPI.HPBarFrameWidthScale;
 
                 foreach (var i in enemeyCreator.scriptAPI.BattleStatusBaseParams)
                 {
