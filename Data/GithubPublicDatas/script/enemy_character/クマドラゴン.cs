@@ -1,7 +1,8 @@
 Name = "半魚人";
 ImagePath = @"data/image/enm/53_竜の雛.png";
-ImageScale = 1.0;
+//ImageScale = 1.0;
 ImageSideMargin = 0.5;
+HPBarFrameWidthScale = 6.00;
 
 HP = 500;
 

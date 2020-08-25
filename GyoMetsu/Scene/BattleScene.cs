@@ -65,21 +65,23 @@ namespace GyoMetsu.Scene
 
         bool isInputEventNowFrame = false;
 
+        List<Data.Character> retrayPlayerCaracters; // リトライ時の記録・再現用
+
         public BattleScene( string scriptPath )
         {
             scriptAPI = new ScriptAPI();
             script = new Emugen.Script.Script<ScriptAPI>(scriptPath, scriptAPI);
             script.Run();
 
-            var data = new Data.DataCreater();
+            var data = Data.DataCreater.Instance;
 
             if (scriptAPI.__bgmPath != null)
             {
                 var bgm = new Emugen.Sound.SoundPlayer(scriptAPI.__bgmPath, 0.20f, true, Emugen.Sound.SoundPlayer.SoundType.BGM);
             }
 
-            SetupEnemys();
             SetupPlayers();
+            SetupEnemys();
 
             {
                 PlayerCards = new UI.PlayerCard.PlayerCards();
@@ -278,9 +280,41 @@ namespace GyoMetsu.Scene
             }
         }
 
+        private void SetupPlayers()
+        {
+            var data = Data.DataCreater.Instance;
+
+            foreach( var v in data.playerCharacters)
+            {
+                if ( v.HP.Now == 0 )
+                {
+                    v.HP.Now = 1;
+                }
+            }
+
+            if (retrayPlayerCaracters==null)
+            {
+                retrayPlayerCaracters = new List<Character>();
+
+                foreach (var v in data.playerCharacters)
+                {
+                    var chara = new Data.Character();
+                    chara.HP.Now = v.HP.Now;
+                    chara.elementTimer = v.elementTimer;
+                    chara.ElementLing.pos = v.ElementLing.pos;
+                    foreach ( var element in v.Elements)
+                    {
+                        chara.Elements.Add(new Element(element.Name));
+                    }
+                    retrayPlayerCaracters.Add(chara);
+                }
+            }
+        }
+
         private void SetupEnemys()
         {
             var data = Data.DataCreater.Instance;
+            data.enemyCharacters.Clear();
 
             foreach (var command in scriptAPI.__enemyCommands)
             {
@@ -289,7 +323,7 @@ namespace GyoMetsu.Scene
                 var chara = new Data.Character();
                 chara.ViewName = enemeyCreator.scriptAPI.Name;
                 chara.imagePath = enemeyCreator.scriptAPI.ImagePath;
-                chara.imageScale = enemeyCreator.scriptAPI.ImageScale;
+                chara.imageScale = 1.0;// enemeyCreator.scriptAPI.ImageScale;
                 chara.imageSideMargin = enemeyCreator.scriptAPI.ImageSideMargin;
                 chara.HP.Now = chara.HP.Base = chara.HP.Max = enemeyCreator.scriptAPI.HP;
                 chara.HPBarFrameWidthScale = enemeyCreator.scriptAPI.HPBarFrameWidthScale;
@@ -346,60 +380,6 @@ namespace GyoMetsu.Scene
 
         }
 
-        private void SetupPlayers()
-        {
-            var data = Data.DataCreater.Instance;
-
-            foreach (var q in scriptAPI.__pcCommands)
-            {
-
-                var creator = new Data.PlayerCreator(q);
-
-                var chara = new Data.Character();
-                chara.ViewName = creator.scriptAPI.Name;
-                chara.imagePath = creator.scriptAPI.ImagePath;
-                chara.HP.Now = chara.HP.Base = chara.HP.Max = creator.scriptAPI.HP;
-
-                foreach (var i in creator.scriptAPI.BattleStatusBaseParams)
-                {
-                    foreach (var j in chara.BattleStatusParams)
-                    {
-                        if (i.Key == j.Key)
-                        {
-                            j.Value.Base = j.Value.Now = i.Value;
-                            break;
-                        }
-                    }
-                }
-
-                foreach (var ad in creator.scriptAPI.ActionSkillDatas)
-                {
-                    var datas = Data.ActionSkillDatas.Instance;
-
-                    foreach (var i in datas.Items)
-                    {
-                        if (i.Name == ad.Name)
-                        {
-                            chara.Actions.Add(i);
-                            break;
-                        }
-                    }
-                }
-
-                foreach (var p in creator.scriptAPI.ElementLingPart)
-                {
-                    chara.ElementLing.Bodys.Add(p);
-                }
-
-                foreach (var p in creator.scriptAPI.DefalutStockElement)
-                {
-                    chara.Elements.Add(new Data.Element(p.ToString()));
-                }
-                data.playerCharacters.Add(chara);
-            }
-
-        }
-
         public override void Update()
         {
             isInputEventNowFrame = false;
@@ -424,7 +404,7 @@ namespace GyoMetsu.Scene
                     break;
             }
 
-            Data.DataCreater.Instance.Update();
+            if (battleStep == BattleStep.Main) Data.DataCreater.Instance.Update(); // 行動シンボルの増加を戦闘中のみに限定するためのif文
             SkillCards.Update();
             PlayerCards.Update();
             EnemyCards.Update();
@@ -514,8 +494,22 @@ namespace GyoMetsu.Scene
                             {
                                 case "もう一度戦う":
                                     {
+                                        var data = Data.DataCreater.Instance;
+                                        var i = 0;
+                                        foreach (var v in retrayPlayerCaracters)
+                                        {
+                                            var chara = data.playerCharacters[i];
+                                            chara.HP.Now = v.HP.Now;
+                                            chara.elementTimer = v.elementTimer;
+                                            chara.ElementLing.pos = v.ElementLing.pos;
+                                            chara.Elements.Clear();
+                                            foreach (var element in v.Elements)
+                                            {
+                                                chara.Elements.Add(new Element(element.Name));
+                                            }
+                                            i++;
+                                        }
                                         WindowManager.nextScene = new Scene.BattleScene(this.script.Path);
-                                        //}
                                     }
                                     break;
                                 case "タイトルに戻る":
@@ -551,17 +545,13 @@ namespace GyoMetsu.Scene
             public string __bgmPath;
             public string __nextTalkScriptPath;
             public List<string> __enemyCommands = new List<string>();
-            public List<string> __pcCommands = new List<string>();
 
 
             public void AddEnemy(string command)
             {
                 __enemyCommands.Add(command);
             }
-            public void AddPlayerCharacter(string command)
-            {
-                __pcCommands.Add(command);
-            }
+
 
             public void SetBackGroundImagePath( string backGroundImagePath)
             {

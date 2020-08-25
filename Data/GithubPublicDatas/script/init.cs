@@ -1,5 +1,9 @@
 Title = "魚滅の槍";
 
+AddPlayerCharacter("data/script/player_character/ソレガシ.cs");
+AddPlayerCharacter("data/script/player_character/トレンリー.cs");
+AddPlayerCharacter("data/script/player_character/レイチェル.cs");
+
 StartTitleScene();
 //StartTestScene();
 

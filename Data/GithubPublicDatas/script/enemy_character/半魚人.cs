@@ -1,6 +1,5 @@
 Name = "半魚人";
 ImagePath = @"data/image/enm/47_サハギン_scale0x3.png";
-ImageScale = 1.0;
 ImageSideMargin = 0.5;
 
 HP = 65;

@@ -35,6 +35,7 @@ namespace GyoMetsu
                 }
             }
 
+            var data = new Data.DataCreater();
             var script = new Emugen.Script.Script<StartScript>("data/script/init.cs", new StartScript());
             script.Run();
 
