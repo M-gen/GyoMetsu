@@ -158,6 +158,16 @@ namespace GyoMetsu.UI.PlayerCard
             }
         }
 
+        public void PlayVoiceVictory()
+        {
+
+            var r = (new Random()).Next(cards.Count);
+            var r2 = (new Random()).Next(2);
+            var path = cards[r].character.voiceDirecotryPath + "/Victory_" + r2 + ".wav";
+            var voice = new Emugen.Sound.SoundPlayer(path, 0.80f, false, Emugen.Sound.SoundPlayer.SoundType.Voice);
+
+        }
+
         public override void Draw()
         {
             layer.Draw();

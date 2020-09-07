@@ -25,6 +25,7 @@ namespace GyoMetsu.Data
             public string ImagePath;
             public string DefalutStockElement;
             public int HP = 0;
+            public string VoiceDirecotryPath = "";
 
             public class ActionSkillData
             {

@@ -67,6 +67,14 @@ namespace GyoMetsu.Scene
 
         List<Data.Character> retrayPlayerCaracters; // リトライ時の記録・再現用
 
+        class WinResultStatus
+        {
+            public TextSprite textSprite;
+            public int timer = 0;
+            public Vector2D textSpriteDefaultSize;
+        }
+        WinResultStatus winResultStatus = null;
+
         public BattleScene( string scriptPath )
         {
             scriptAPI = new ScriptAPI();
@@ -79,7 +87,7 @@ namespace GyoMetsu.Scene
             {
                 var bgm = new Emugen.Sound.SoundPlayer(scriptAPI.__bgmPath, 0.20f, true, Emugen.Sound.SoundPlayer.SoundType.BGM);
             }
-
+            
             SetupPlayers();
             SetupEnemys();
 
@@ -448,6 +456,27 @@ namespace GyoMetsu.Scene
                     if( EnemyCards.Count ==0 )
                     {
                         battleStep = BattleStep.End;
+                        
+                        PlayerCards.PlayVoiceVictory();
+
+                        {
+                            var font = new Font(
+                                Config.MainConfig.MainFontPath,
+                                100,
+                                new Color(1, 1, 1, 1),
+                                new Font.FontFrame[] {
+                                    new Font.FontFrame(5, new Color(1, 1, 1, 1)),
+                                    new Font.FontFrame(5, new Color(1, 0, 0, 0)) },
+                                0);
+                            var sprite = new TextSprite("Win", font, new Vector2D( 600, 300 ));
+                            sprite.Color.A = 0;
+                            layer.Add(sprite, 200);
+
+                            winResultStatus = new WinResultStatus();
+                            winResultStatus.textSprite = sprite;
+                            winResultStatus.timer = 0;
+                            winResultStatus.textSpriteDefaultSize = new Vector2D( sprite.Rect.Size );
+                        }
 
                         var bgm = new Emugen.Sound.SoundPlayer(Config.MainConfig.BattleScene.BGMStageClear, 0.20f, true, Emugen.Sound.SoundPlayer.SoundType.BGM);
 
@@ -523,6 +552,20 @@ namespace GyoMetsu.Scene
                     break;
                 case BattleStep.End:
                     {
+                        if ( winResultStatus!=null )
+                        {
+                            if (winResultStatus.timer < 100) {
+                                //var scale = (100 + (100 - (double)winResultStatus.timer)) / 100;
+                                //var a =  (100 - (double)winResultStatus.timer) / 100;
+                                var a =   (double)winResultStatus.timer / 100;
+                                //winResultStatus.textSprite.Rect.Size.X = winResultStatus.textSpriteDefaultSize.X * scale;
+                                //winResultStatus.textSprite.Rect.Size.Y = winResultStatus.textSpriteDefaultSize.Y * scale;
+                                winResultStatus.textSprite.Color.A = a;
+
+                                winResultStatus.timer++;
+                            }
+                        }
+
                         var input = Emugen.Input.InputCore.Instance;
                         if ((input.GetKeyEventType(Emugen.Input.InputCore.KeyEventCode.MouseLeftButton) == Emugen.Input.InputCore.KeyEventType.Up))
                         {

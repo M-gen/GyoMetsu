@@ -49,6 +49,7 @@ namespace GyoMetsu
             var chara = new Data.Character();
             chara.ViewName = creator.scriptAPI.Name;
             chara.imagePath = creator.scriptAPI.ImagePath;
+            chara.voiceDirecotryPath = creator.scriptAPI.VoiceDirecotryPath;
             chara.HP.Now = chara.HP.Base = chara.HP.Max = creator.scriptAPI.HP;
 
             foreach (var i in creator.scriptAPI.BattleStatusBaseParams)

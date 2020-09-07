@@ -1,5 +1,6 @@
 Name = "トレンリー";
 ImagePath = @"data/image/Characters/トレンリー.png";
+VoiceDirecotryPath = @"data/voice/def_fcs5";
 
 HP = 50;
 

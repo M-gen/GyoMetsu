@@ -10,6 +10,7 @@ namespace GyoMetsu.Data
     {
         public string Name;
         public string Cost;
+        public string ImagePath = Config.MainConfig.Card.SkillDefault;
 
         public ActionStatus Main;
         public List<ActionStatus> SubItems = new List<ActionStatus>();

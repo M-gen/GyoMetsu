@@ -1,5 +1,6 @@
 Name = "ソレガシ";
 ImagePath = @"data/image/Characters/侍男_cut.png";
+VoiceDirecotryPath = @"data/voice/def_mcs1";
 
 HP = 65;
 

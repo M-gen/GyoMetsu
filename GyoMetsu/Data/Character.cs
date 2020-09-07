@@ -47,6 +47,7 @@ namespace GyoMetsu.Data
         public string imagePath       = "";
         public double imageScale      = 1.0;
         public double imageSideMargin = 1.0;
+        public string voiceDirecotryPath = "";
 
         public double elementTimer = 0;
         public double elementTimerMax = 300;
@@ -249,16 +250,46 @@ namespace GyoMetsu.Data
                                     targetCard.RemoveElementAll();
                                 }
 
+                                if (targetCard.character.voiceDirecotryPath != "")
+                                {
+                                    var path = targetCard.character.voiceDirecotryPath + "/Unable_To_Fight.wav";
+                                    var voice = new Emugen.Sound.SoundPlayer(path, 0.80f, false, Emugen.Sound.SoundPlayer.SoundType.Voice);
+                                }
                             }
                             else
                             {
+                                if (targetCard.character.voiceDirecotryPath != "")
+                                {
+                                    var r = random.Next(2);
+                                    var path = "";
+                                    switch (r)
+                                    {
+                                        case 0: path = targetCard.character.voiceDirecotryPath + "/Damage_1.wav"; break;
+                                        case 1: path = targetCard.character.voiceDirecotryPath + "/Damage_2.wav"; break;
+                                    }
+                                    var voice = new Emugen.Sound.SoundPlayer(path, 0.80f, false, Emugen.Sound.SoundPlayer.SoundType.Voice);
+                                }
+
                                 targetCard.damageTimer = 0;
                             }
                             targetCard.ShowDamage(value);
                             targetCard.RefreshViewHP();
+
                         }
                         else
                         {
+                            if (targetCard.character.voiceDirecotryPath != "")
+                            {
+                                var r = random.Next(2);
+                                var path = "";
+                                switch (r)
+                                {
+                                    case 0: path = targetCard.character.voiceDirecotryPath + "/No_Damage_1.wav"; break;
+                                    case 1: path = targetCard.character.voiceDirecotryPath + "/No_Damage_2.wav"; break;
+                                }
+                                var voice = new Emugen.Sound.SoundPlayer(path, 0.80f, false, Emugen.Sound.SoundPlayer.SoundType.Voice);
+                            }
+
                             targetCard.ShowMiss();
 
                         }

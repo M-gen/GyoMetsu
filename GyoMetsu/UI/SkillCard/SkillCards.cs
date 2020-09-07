@@ -131,8 +131,8 @@ namespace GyoMetsu.UI.SkillCard
                         var character = (Data.Character)obj;
                         foreach(var action in character.Actions )
                         {
-                            // Todo : スキルカードの画像を直接指定している
-                            Add(new System.Drawing.Bitmap(Config.MainConfig.Card.SkillDefault), character, action);
+                            //Add(new System.Drawing.Bitmap(Config.MainConfig.Card.SkillDefault), character, action);
+                            Add(new System.Drawing.Bitmap(action.ImagePath), character, action);
                         }
                         BackGroundSprite.IsDraw = true;
                     }

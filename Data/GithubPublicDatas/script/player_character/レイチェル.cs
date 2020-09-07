@@ -1,5 +1,6 @@
 Name = "レイチェル";
 ImagePath = @"data/image/Characters/レイチェル.png";
+VoiceDirecotryPath = @"data/voice/def_fcs6";
 
 HP = 45;
 
